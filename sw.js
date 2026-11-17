@@ -1,10 +1,11 @@
 // 서비스 워커: 앱 파일을 캐시해 오프라인에서도 열리게 합니다.
 // index.html 등을 수정해 배포할 때는 CACHE 버전을 올려야 기존 사용자에게 새 내용이 반영됩니다.
-const CACHE = "couple-guide-v2";
+const CACHE = "couple-guide-v3";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
 
+// cache: reload — GitHub Pages의 HTTP 캐시 때문에 새 버전 설치 시 옛 파일이 담기는 문제를 막습니다.
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES.map((f) => new Request(f, { cache: "reload" })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (e) => {

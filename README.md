@@ -22,4 +22,4 @@ python3 -m http.server 8000   # http://localhost:8000
 
 ## 개인정보
 
-결단문, 점검 체크, 개인 기록은 브라우저 `localStorage`에만 저장되며 어디로도 전송되지 않습니다.
+작성한 다짐, 점검 체크, 개인 기록은 브라우저 `localStorage`에만 저장되며 어디로도 전송되지 않습니다.
